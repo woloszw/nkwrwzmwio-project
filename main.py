@@ -58,36 +58,42 @@ def count_islands(matrix):
 def get_flooded(map_, mid):
     map = copy.deepcopy(map_)
     n=len(map)
+    m=len(map[0])
 
 # pusta lista punktów odwiedzonych i zalanych
     flooded = []
     visited = []
 
 # przechodzenie po krawędziach
-    for i in range(n):
-
-        j = 0
 # krawędź lewa
+    for i in range(n):
+        j = 0
         if map[i][j] <= mid:
             if (i, j) not in visited:
                 flooded.append((i, j))
+
 # krawędź górna
-        if map[j][i] <= mid:
-            if (j,i) not in visited:
-                flooded.append((j, i))
-
-        j = n - 1
-# krawędź prawa
+    for j in range(m):
+        i = 0
         if map[i][j] <= mid:
             if (i, j) not in visited:
                 flooded.append((i, j))
+
+# krawędź prawa
+    for i in range(n):
+        j = m - 1
+        if map[i][j] <= mid:
+            if (i, j) not in visited:
+                flooded.append((i, j))
+
 # krawędź dolna
-        if map[j][i] <= mid:
-            if (j, i) not in visited:
-                flooded.append((j, i))
+    for j in range(m):
+        i = n - 1
+        if map[i][j] <= mid:
+            if (i, j) not in visited:
+                flooded.append((i, j))
 
-
-# przechodzenie po wszystkich sąsiadach zalanych
+# przechodzenie po wszystkich sąsiadach zalanych punktów
     while (len(flooded)>0):
         index = flooded.pop(0)
         i,j=index
@@ -123,7 +129,7 @@ def get_flooded(map_, mid):
                     #print("zalany poniżej\n")
 
 # nie sprawdzaj w lewo po lewej
-        if (index[1] < n - 1):
+        if (index[1] < m - 1):
             i = index[0]
             j = index[1] + 1
             if (map[i][j] <= mid):
