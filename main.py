@@ -10,13 +10,12 @@ def check_sea_level(map_):
 # zwróć zalane obszary
         flooded = get_flooded(map, water_level)
 
-    #DO ZROBIENIA - liczenie wysp
-        islands=count_islands(flooded);
-    # jesli się pojawiły wyspy to kończ
-        if(islands>1):
+# sprawdź czy jest więcej niż 1 wyspa
+        if(is_map_divided(flooded)):
             break
+
     printmaps(map, flooded)
-    print("sea level: ",water_level,"\tislands: ",islands)
+    print("sea level: ",water_level,"\n")
     print()
     return water_level
 
@@ -138,6 +137,62 @@ def get_flooded(map_, mid):
                     #print("zalany po lewej\n")
 # zwróć zalaną mapę
     return map
+def is_map_divided(map_):
+    map = copy.deepcopy(map_)
+    n = len(map)
+    m = len(map[0])
+
+    # pusta lista punktów odwiedzonych i zalanych
+
+    flooded = []
+    flooded_temp = []
+    visited = []
+    to_visit = []
+
+    for i in range(n):
+        # iterate over the columns of the matrix
+        for j in range(m):
+            # check if the element is non-zero
+            if map[i][j] != 0:
+                # if so, add the indices to the list
+                flooded.append((i, j))
+                flooded_temp.append((i, j))
+
+    index = flooded_temp.pop(0)
+    to_visit.append(index)
+
+    while (len(to_visit) > 0):
+        index = to_visit.pop(0)
+        i,j = index
+        visited.append(index)
+
+        a = i
+        b = j + 1
+        if(a, b) in flooded:
+            if(a, b) not in visited:
+                to_visit.append((a, b))
+        a = i
+        b = j - 1
+        if(a, b) in flooded:
+            if(a, b) not in visited:
+                to_visit.append((a, b))
+        a = i + 1
+        b = j
+        if(a, b) in flooded:
+            if(a, b) not in visited:
+                to_visit.append((a, b))
+        a = i - 1
+        b = j
+        if(a, b) in flooded:
+            if(a, b) not in visited:
+                to_visit.append((a, b))
+
+    print()
+    if set(flooded) == set(visited):
+        return False
+    else:
+        return True
+
 
 if __name__ == '__main__':
 
