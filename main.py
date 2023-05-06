@@ -195,25 +195,9 @@ def is_map_divided(map_):
 
 
 if __name__ == '__main__':
+    with open('island.txt', 'r') as f:
+        lines = f.readlines()
+        map = [list(map(int, line.strip().split())) for line in lines]
 
-    print("map 1")
-    map =  [[8, 5, 7, 3, 1],
-            [5, 5, 6, 7, 3],
-            [1, 4, 2, 4, 4],
-            [2, 3, 5, 5, 6],
-            [2, 3, 2, 4, 4]]
     check_sea_level(map)
-
-    print("map 2")
-    map = [[7, 2, 3],
-           [5, 1, 5],
-           [3, 2, 8]]
-    check_sea_level(map)
-
-    print("map 3")
-    map =  [[8, 5, 7, 3],
-            [5, 5, 6, 7],
-            [1, 4, 2, 4],
-            [2, 3, 5, 5],
-            [2, 3, 2, 4]]
-    check_sea_level(map)
+    input("Press any key")
