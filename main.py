@@ -159,6 +159,7 @@ def is_map_divided(map_):
                 flooded_temp.append((i, j))
 
     if(len(flooded_temp)==0):
+        print("wyspa sie nie podzieli\n")
         return True
     index = flooded_temp.pop(0)
     to_visit.append(index)
