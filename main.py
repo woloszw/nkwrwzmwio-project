@@ -158,6 +158,8 @@ def is_map_divided(map_):
                 flooded.append((i, j))
                 flooded_temp.append((i, j))
 
+    if(len(flooded_temp)==0):
+        return True
     index = flooded_temp.pop(0)
     to_visit.append(index)
 
